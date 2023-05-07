@@ -1,5 +1,6 @@
 package com.example.androidconcepts.ui
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -33,14 +34,15 @@ class BmiFragment : androidx.fragment.app.Fragment() {
         return bmiFragmentBinding?.root
     }
 
+    @SuppressLint("SetTextI18n")
     fun calculate() {
         var weight = bmiFragmentBinding?.bmiWeight?.text.toString()
         var height = bmiFragmentBinding?.bmiHeight?.text.toString()
         var result = bmiViewModel?.calculateBmi(weight, height)
-        result?.observe(viewLifecycleOwner,{
+        result?.observe(viewLifecycleOwner) {
             bmiFragmentBinding?.bmiResult?.visibility = View.VISIBLE
-            bmiFragmentBinding?.bmiResult?.text = it.toString()
-        })
+            bmiFragmentBinding?.bmiResult?.text = "${it.info.bmi} , ${it.info.health}"
+        }
 
     }
 }

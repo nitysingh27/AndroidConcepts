@@ -4,6 +4,7 @@ import com.example.androidconcepts.repository.BmiRepository
 import com.example.androidconcepts.repository.BmrRepository
 import com.example.androidconcepts.retrofit.RetrofitApiCall
 import com.example.androidconcepts.room.BmiDao
+import com.example.androidconcepts.room.BmrDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -21,7 +22,7 @@ object RepositoryModule  {
     }
     @Provides
     @Singleton
-    fun provideRepositoryObjectForBmr(retrofitApiCall : RetrofitApiCall ) : BmrRepository {
-        return BmrRepository(retrofitApiCall)
+    fun provideRepositoryObjectForBmr(retrofitApiCall : RetrofitApiCall, bmrDao: BmrDao ) : BmrRepository {
+        return BmrRepository(retrofitApiCall, bmrDao)
     }
 }

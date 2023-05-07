@@ -11,6 +11,6 @@ interface BmrDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertBmrRequestResponse(bmrRoomEntity: RoomEntity)
 
-    @Query("SELECT * FROM BmrRoomEntity WHERE request = :request ")
+    @Query("SELECT * FROM BmiRoomEntity WHERE request = :request ")
     suspend fun getBmrFromRequest(request :String) : List<RoomEntity>
 }

@@ -22,7 +22,7 @@ class BmiFragmentViewModel @Inject constructor(
      fun calculateBmi(weight: String,height : String): MutableLiveData<BmiResponseEntity> {
          var bmiResponse: BmiResponseEntity? = null
          viewModelScope.launch(Dispatchers.IO) {
-          //   bmiResponse = bmiRepository.bmicalc(weight, height)
+             bmiResponse = bmiRepository.bmicalc(weight, height)
              liveDataResponse.postValue(bmiResponse?: BmiResponseEntity(info = Info(0.0,"","")))
              Log.d("TAG", "calculateBmi: $bmiResponse")
          }

@@ -1,0 +1,187 @@
+Index: app/src/main/java/com/example/androidconcepts/viewmodel/BfpFragmentViewmodel.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/androidconcepts/viewmodel/BfpFragmentViewmodel.kt b/app/src/main/java/com/example/androidconcepts/viewmodel/BfpFragmentViewmodel.kt
+new file mode 100644
+--- /dev/null	(date 1683482852430)
++++ b/app/src/main/java/com/example/androidconcepts/viewmodel/BfpFragmentViewmodel.kt	(date 1683482852430)
+@@ -0,0 +1,11 @@
++package com.example.androidconcepts.viewmodel
++
++import androidx.lifecycle.ViewModel
++import dagger.hilt.android.lifecycle.HiltViewModel
++import javax.inject.Inject
++
++@HiltViewModel
++class BfpFragmentViewmodel @Inject constructor(
++) : ViewModel() {
++
++}
+\ No newline at end of file
+Index: app/src/main/java/com/example/androidconcepts/ui/BfpFragmet.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/androidconcepts/ui/BfpFragmet.kt b/app/src/main/java/com/example/androidconcepts/ui/BfpFragmet.kt
+new file mode 100644
+--- /dev/null	(date 1683482852427)
++++ b/app/src/main/java/com/example/androidconcepts/ui/BfpFragmet.kt	(date 1683482852427)
+@@ -0,0 +1,48 @@
++package com.example.androidconcepts.ui
++
++import android.os.Bundle
++import android.view.LayoutInflater
++import android.view.View
++import android.view.ViewGroup
++import androidx.databinding.DataBindingUtil
++import androidx.fragment.app.viewModels
++import com.example.androidconcepts.R
++import com.example.androidconcepts.databinding.FragmentBfpBinding
++import com.example.androidconcepts.viewmodel.BfpFragmentViewmodel
++import dagger.hilt.android.AndroidEntryPoint
++
++@AndroidEntryPoint
++class BfpFragmet : androidx.fragment.app.Fragment() {
++    var binding: FragmentBfpBinding? = null
++    private val bfp: BfpFragmentViewmodel by viewModels()
++    override fun onCreateView(
++        inflater: LayoutInflater,
++        container: ViewGroup?,
++        savedInstanceState: Bundle?
++    ): View? {
++        /*bmiViewModel = ViewModelProvider(
++            this,
++            ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().application)
++        )[BmiFragmentViewModel::class.java]*/
++        binding =
++            DataBindingUtil.inflate(inflater, R.layout.fragment_bfp, container, false)
++        binding?.bmrCalculate?.setOnClickListener {
++            calculate()
++        }
++        return binding?.root
++    }
++
++    fun calculate() {
++        var weight = binding?.bmrWeight?.text.toString()
++        var height = binding?.bmrHeight?.text.toString()
++        var age = binding?.bmrAge?.text.toString()
++        var gender = binding?.bmrGender?.text.toString()
++//        var result = bfp?.calculateBmr(weight, height,age,gender)
++//        result?.observe(viewLifecycleOwner) {
++//            binding?.bmrResult?.visibility = View.VISIBLE
++//            // bmrFragmentBinding?.bmrResult?.text = "${it.info.bmi} , ${it.info.health}"
++//            binding?.bmrResult?.text = "${it.bmr.toString()} , ${it.gender}"
++//        }
++
++    }
++}
+Index: app/src/main/res/layout/fragment_bfp.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/fragment_bfp.xml b/app/src/main/res/layout/fragment_bfp.xml
+new file mode 100644
+--- /dev/null	(date 1683482852412)
++++ b/app/src/main/res/layout/fragment_bfp.xml	(date 1683482852412)
+@@ -0,0 +1,96 @@
++<?xml version="1.0" encoding="utf-8"?>
++<layout xmlns:app="http://schemas.android.com/apk/res-auto">
++    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
++        android:layout_width="match_parent"
++        android:layout_height="match_parent"
++        android:background="@color/black"
++        android:id="@+id/bmr_fragment">
++
++
++        <TextView
++            android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            android:id="@+id/enter_bmr_details"
++            android:text="Enter Details Below :"
++            android:textColor="@color/white"
++            android:layout_marginTop="30dp"
++            android:layout_marginLeft="20dp"
++            app:layout_constraintTop_toTopOf="parent"
++            app:layout_constraintLeft_toLeftOf="parent"
++            android:textSize="20dp"
++            android:textStyle="bold">
++
++        </TextView>
++        <EditText
++            android:id="@+id/bmr_weight"
++            android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            app:layout_constraintTop_toBottomOf="@id/enter_bmr_details"
++            app:layout_constraintLeft_toLeftOf="parent"
++            android:layout_marginLeft="20dp"
++            android:backgroundTint="@color/teal_200"
++            android:background="@color/white"
++            android:layout_marginTop="20dp"
++            android:hint="Weight (in kgs)"
++            />
++        <EditText
++            android:id="@+id/bmr_height"
++            android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            app:layout_constraintTop_toBottomOf="@id/bmr_weight"
++            app:layout_constraintLeft_toLeftOf="parent"
++            android:layout_marginLeft="20dp"
++            android:backgroundTint="@color/teal_200"
++            android:background="@color/white"
++            android:layout_marginTop="20dp"
++            android:hint="Height (in cms)"
++            />
++        <EditText
++            android:id="@+id/bmr_age"
++            android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            app:layout_constraintTop_toBottomOf="@id/bmr_height"
++            app:layout_constraintLeft_toLeftOf="parent"
++            android:layout_marginLeft="20dp"
++            android:backgroundTint="@color/teal_200"
++            android:background="@color/white"
++            android:layout_marginTop="20dp"
++            android:hint="Age"
++            />
++        <EditText
++            android:id="@+id/bmr_gender"
++            android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            app:layout_constraintTop_toBottomOf="@id/bmr_age"
++            app:layout_constraintLeft_toLeftOf="parent"
++            android:layout_marginLeft="20dp"
++            android:backgroundTint="@color/teal_200"
++            android:background="@color/white"
++            android:layout_marginTop="20dp"
++            android:hint="Gender"
++            />
++        <Button
++            android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            android:id="@+id/bmr_calculate"
++            app:layout_constraintTop_toBottomOf="@id/bmr_gender"
++            app:layout_constraintLeft_toLeftOf="parent"
++            android:layout_marginLeft="20dp"
++            android:layout_marginTop="20dp"
++            android:text="Calculate bfp">
++        </Button>
++        <TextView
++            android:visibility="gone"
++            android:textColor="@color/white"
++            android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            android:id="@+id/bmr_result"
++            app:layout_constraintTop_toBottomOf="@id/bmr_calculate"
++            app:layout_constraintLeft_toLeftOf="parent"
++            android:layout_marginLeft="20dp"
++            android:layout_marginTop="20dp">
++
++        </TextView>
++
++    </androidx.constraintlayout.widget.ConstraintLayout>
++</layout>
+\ No newline at end of file

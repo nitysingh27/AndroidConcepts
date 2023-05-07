@@ -4,6 +4,7 @@ import com.example.androidconcepts.repository.BfpRepository
 import com.example.androidconcepts.repository.BmiRepository
 import com.example.androidconcepts.repository.BmrRepository
 import com.example.androidconcepts.retrofit.RetrofitApiCall
+import com.example.androidconcepts.room.BfpDao
 import com.example.androidconcepts.room.BmiDao
 import com.example.androidconcepts.room.BmrDao
 import dagger.Module
@@ -28,7 +29,7 @@ object RepositoryModule  {
     }
     @Provides
     @Singleton
-    fun provideRepositoryObjectForBfp(retrofitApiCall : RetrofitApiCall) : BfpRepository {
-        return BfpRepository(retrofitApiCall)
+    fun provideRepositoryObjectForBfp(retrofitApiCall : RetrofitApiCall, bfpDao: BfpDao) : BfpRepository {
+        return BfpRepository(retrofitApiCall, bfpDao)
     }
 }

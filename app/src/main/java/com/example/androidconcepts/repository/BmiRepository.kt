@@ -4,7 +4,7 @@ import android.content.ContentValues.TAG
 import android.util.Log
 import com.example.androidconcepts.model.BmiInfo
 import com.example.androidconcepts.model.BmiResponseEntity
-import com.example.androidconcepts.model.BmiRoomEntity
+import com.example.androidconcepts.model.RoomEntity
 import com.example.androidconcepts.retrofit.RetrofitApiCall
 import com.example.androidconcepts.room.BmiDao
 import com.google.gson.Gson
@@ -20,7 +20,7 @@ class BmiRepository @Inject constructor(
         var responseList = room.getBmiFromRequest(requestString)
         if (responseList.isEmpty()) {
             val v = retrofit.getBmi(weight = weight, height = height)
-            room.insertBmiRequestResponse(BmiRoomEntity(Gson().toJson(v.info), requestString))
+            room.insertBmiRequestResponse(RoomEntity(Gson().toJson(v.info), requestString))
             Log.d(TAG, "value from api call : $v")
             return v
         } else {

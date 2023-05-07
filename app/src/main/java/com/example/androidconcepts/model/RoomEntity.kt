@@ -2,10 +2,9 @@ package com.example.androidconcepts.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.example.androidconcepts.model.BmiInfo
 
 @Entity(tableName = "BmiRoomEntity")
-data class BmiRoomEntity(
+data class RoomEntity(
     val info: String,
 
     @PrimaryKey

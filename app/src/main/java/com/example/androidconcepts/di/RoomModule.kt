@@ -2,6 +2,7 @@ package com.example.androidconcepts.di
 
 import android.content.Context
 import androidx.room.Room
+import com.example.androidconcepts.room.BfpDao
 import com.example.androidconcepts.room.BmiDao
 import com.example.androidconcepts.room.BmrDao
 import com.example.androidconcepts.room.RoomDataBase
@@ -36,6 +37,11 @@ object RoomModule {
     @Singleton
     fun provideBmrDao(db: RoomDataBase) : BmrDao {
         return db.bmrDao()
+    }
+    @Provides
+    @Singleton
+    fun provideBfpDao(db: RoomDataBase) : BfpDao {
+        return db.bfpDao()
     }
 
 

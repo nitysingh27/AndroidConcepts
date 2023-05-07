@@ -43,13 +43,13 @@ class BfpFragment : androidx.fragment.app.Fragment() {
         var age = bmrFragmentBinding?.bmrAge?.text.toString()
         var gender = bmrFragmentBinding?.bmrGender?.text.toString()
         var result = bmrViewModel?.calculateBfp(weight, height,age,gender)
-        /*result?.observe(viewLifecycleOwner) {
+        result?.observe(viewLifecycleOwner) {
             bmrFragmentBinding?.bmrResult?.visibility = View.VISIBLE
             // bmrFragmentBinding?.bmrResult?.text = "${it.info.bmi} , ${it.info.health}"
-            bmrFragmentBinding?.bmrResult?.text = "${it.bmr.toString()} , ${it.gender}"
-        }*/
+            bmrFragmentBinding?.bmrResult?.text = "${it.bfp.toString()}, ${it.gender} , ${it.lean_mass}, ${it.fat_mass} ,${it.description}"
+        }
         bmrFragmentBinding?.bmrResult?.visibility = View.VISIBLE
-        bmrFragmentBinding?.bmrResult?.text=result.toString()
+       // bmrFragmentBinding?.bmrResult?.text=result.toString()
 
     }
 }

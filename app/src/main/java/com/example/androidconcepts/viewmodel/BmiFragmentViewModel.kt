@@ -19,6 +19,7 @@ class BmiFragmentViewModel @Inject constructor(
              val bmiResponse = bmiRepository.bmicalc(weight, height)
 
          }
+         //changed
          return " "
      }
 

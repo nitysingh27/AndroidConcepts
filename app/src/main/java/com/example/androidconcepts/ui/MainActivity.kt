@@ -22,6 +22,15 @@ class MainActivity : AppCompatActivity() {
             displayBmr()
         }
 
+        binding?.bfp?.setOnClickListener {
+            displayBfp()
+        }
+
+    }
+
+    private fun displayBfp() {
+        supportFragmentManager.beginTransaction().replace(R.id.fragment_container, BfpFragment())
+            .commit()
     }
 
     private fun displayBmr() {

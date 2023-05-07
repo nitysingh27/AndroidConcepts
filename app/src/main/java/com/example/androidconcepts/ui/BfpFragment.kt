@@ -29,7 +29,7 @@ class BfpFragment : androidx.fragment.app.Fragment() {
             ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().application)
         )[BmiFragmentViewModel::class.java]*/
         bmrFragmentBinding =
-            DataBindingUtil.inflate(inflater, R.layout.fragment_bmr, container, false)
+            DataBindingUtil.inflate(inflater, R.layout.bfp_fragment, container, false)
         bmrFragmentBinding?.bmrCalculate?.setOnClickListener {
             calculate()
         }
@@ -42,12 +42,14 @@ class BfpFragment : androidx.fragment.app.Fragment() {
         var height = bmrFragmentBinding?.bmrHeight?.text.toString()
         var age = bmrFragmentBinding?.bmrAge?.text.toString()
         var gender = bmrFragmentBinding?.bmrGender?.text.toString()
-        var result = bmrViewModel?.calculateBmr(weight, height,age,gender)
-        result?.observe(viewLifecycleOwner) {
+        var result = bmrViewModel?.calculateBfp(weight, height,age,gender)
+        /*result?.observe(viewLifecycleOwner) {
             bmrFragmentBinding?.bmrResult?.visibility = View.VISIBLE
             // bmrFragmentBinding?.bmrResult?.text = "${it.info.bmi} , ${it.info.health}"
             bmrFragmentBinding?.bmrResult?.text = "${it.bmr.toString()} , ${it.gender}"
-        }
+        }*/
+        bmrFragmentBinding?.bmrResult?.visibility = View.VISIBLE
+        bmrFragmentBinding?.bmrResult?.text=result.toString()
 
     }
 }

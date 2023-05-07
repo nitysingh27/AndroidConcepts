@@ -34,7 +34,6 @@ object BmiRetrofitModule {
             .build()
     }
 
-
     @Provides
     @Singleton
     fun provideRetrofit(gson: Gson, client: OkHttpClient): RetrofitApiCall =

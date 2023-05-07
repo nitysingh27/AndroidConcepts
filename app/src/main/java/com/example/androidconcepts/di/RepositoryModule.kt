@@ -1,5 +1,6 @@
 package com.example.androidconcepts.di
 
+import com.example.androidconcepts.repository.BfpRepository
 import com.example.androidconcepts.repository.BmiRepository
 import com.example.androidconcepts.repository.BmrRepository
 import com.example.androidconcepts.retrofit.RetrofitApiCall
@@ -24,5 +25,10 @@ object RepositoryModule  {
     @Singleton
     fun provideRepositoryObjectForBmr(retrofitApiCall : RetrofitApiCall, bmrDao: BmrDao ) : BmrRepository {
         return BmrRepository(retrofitApiCall, bmrDao)
+    }
+    @Provides
+    @Singleton
+    fun provideRepositoryObjectForBfp(retrofitApiCall : RetrofitApiCall) : BfpRepository {
+        return BfpRepository(retrofitApiCall)
     }
 }

@@ -29,6 +29,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun displayBfp() {
+        binding?.mainActivity?.visibility = View.GONE
+        binding?.fragmentContainer?.visibility = View.VISIBLE
         supportFragmentManager.beginTransaction().replace(R.id.fragment_container, BfpFragment())
             .commit()
     }

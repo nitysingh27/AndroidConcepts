@@ -5,13 +5,12 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.androidconcepts.model.RoomEntity
-
 @Dao
-interface BmiDao {
+interface BmrDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertBmiRequestResponse(roomEntity: RoomEntity)
+    suspend fun insertBmrRequestResponse(bmrRoomEntity: RoomEntity)
 
-    @Query("SELECT * FROM BmiRoomEntity WHERE request = :request ")
-    suspend fun getBmiFromRequest(request :String) : List<RoomEntity>
+    @Query("SELECT * FROM BmrRoomEntity WHERE request = :request ")
+    suspend fun getBmrFromRequest(request :String) : List<RoomEntity>
 }

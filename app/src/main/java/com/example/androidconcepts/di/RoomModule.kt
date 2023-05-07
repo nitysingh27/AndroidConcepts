@@ -3,6 +3,7 @@ package com.example.androidconcepts.di
 import android.content.Context
 import androidx.room.Room
 import com.example.androidconcepts.room.BmiDao
+import com.example.androidconcepts.room.BmrDao
 import com.example.androidconcepts.room.RoomDataBase
 import dagger.Module
 import dagger.Provides
@@ -28,8 +29,13 @@ object RoomModule {
     }
     @Provides
     @Singleton
-    fun provideDao(db: RoomDataBase) : BmiDao {
+    fun provideBmiDao(db: RoomDataBase) : BmiDao {
        return db.bmiDao()
+    }
+    @Provides
+    @Singleton
+    fun provideBmrDao(db: RoomDataBase) : BmrDao {
+        return db.bmrDao()
     }
 
 

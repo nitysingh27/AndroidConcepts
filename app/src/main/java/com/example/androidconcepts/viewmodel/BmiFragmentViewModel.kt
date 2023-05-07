@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.androidconcepts.model.BmiResponseEntity
-import com.example.androidconcepts.model.Info
+import com.example.androidconcepts.model.BmiInfo
 import com.example.androidconcepts.repository.BmiRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -23,7 +23,7 @@ class BmiFragmentViewModel @Inject constructor(
          var bmiResponse: BmiResponseEntity? = null
          viewModelScope.launch(Dispatchers.IO) {
              bmiResponse = bmiRepository.bmicalc(weight, height)
-             liveDataResponse.postValue(bmiResponse?: BmiResponseEntity(info = Info(0.0,"","")))
+             liveDataResponse.postValue(bmiResponse?: BmiResponseEntity(info = BmiInfo(0.0,"","")))
              Log.d("TAG", "calculateBmi: $bmiResponse")
          }
          return liveDataResponse

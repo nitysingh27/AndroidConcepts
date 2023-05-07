@@ -1,7 +1,8 @@
 package com.example.androidconcepts.retrofit
 
 import com.example.androidconcepts.model.BmiResponseEntity
-import com.example.androidconcepts.model.BmrResponseEntity
+import com.example.androidconcepts.model.BmrInfo
+import com.example.androidconcepts.model.BmrResposneEntity
 import retrofit2.http.GET
 import retrofit2.http.Headers
 import retrofit2.http.Query
@@ -28,6 +29,6 @@ interface RetrofitApiCall {
         @Query("height") height: String,
         @Query("age") age: String,
         @Query("gender") gender: String
-    ): BmrResponseEntity
+    ): BmrResposneEntity
 
 }

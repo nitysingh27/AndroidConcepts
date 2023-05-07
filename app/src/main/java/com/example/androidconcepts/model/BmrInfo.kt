@@ -1,6 +1,6 @@
 package com.example.androidconcepts.model
 
-data class BmrResponseEntity(
+data class BmrInfo(
     val bmr: Double,
     val gender: String
 )

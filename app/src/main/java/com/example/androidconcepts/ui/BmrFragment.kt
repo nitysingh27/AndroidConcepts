@@ -11,7 +11,9 @@ import com.example.androidconcepts.R
 import com.example.androidconcepts.databinding.FragmentBmrBinding
 import com.example.androidconcepts.viewmodel.BmiFragmentViewModel
 import com.example.androidconcepts.viewmodel.BmrFragmentViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class BmrFragment : androidx.fragment.app.Fragment() {
     var bmrFragmentBinding: FragmentBmrBinding? = null
     private val bmrViewModel: BmrFragmentViewModel by viewModels()

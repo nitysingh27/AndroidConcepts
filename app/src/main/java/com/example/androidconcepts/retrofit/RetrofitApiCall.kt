@@ -36,7 +36,6 @@ interface RetrofitApiCall {
         "X-RapidAPI-Key:c1013262aamsh706a8f67b1e6ad3p1b4a90jsn936f9e42cf9a",
         "X-RapidAPI-Host:mega-fitness-calculator1.p.rapidapi.com"
     )
-
     @GET("/bfp")
     suspend fun getBfp(
         @Query("weight") weight: String,

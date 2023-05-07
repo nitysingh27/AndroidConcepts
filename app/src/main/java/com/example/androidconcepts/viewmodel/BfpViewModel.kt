@@ -26,7 +26,7 @@ class BfpViewModel @Inject constructor(
         var bmrResponse: BmrInfo? = null
         viewModelScope.launch(Dispatchers.IO) {
             bfpResponse = bfpRepository.bfpcalc(weight, height, age, gender)
-            liveDataResponse.postValue(bfpResponse ?: BfpInfo(0.0, " "))
+            liveDataResponse.postValue(bfpResponse ?: BfpInfo(0.0, "", 0.0, 0.0, ""))
 
         }
         return liveDataResponse

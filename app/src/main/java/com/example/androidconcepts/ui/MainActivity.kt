@@ -15,14 +15,22 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-
-
-
         binding?.bmi?.setOnClickListener {
             displayBmi()
         }
+        binding?.bmr?.setOnClickListener {
+            displayBmr()
+        }
+
     }
 
+    private fun displayBmr() {
+
+        binding?.mainActivity?.visibility = View.GONE
+        binding?.fragmentContainer?.visibility = View.VISIBLE
+        supportFragmentManager.beginTransaction().add(R.id.fragment_container, BmrFragment())
+            .addToBackStack(" ").commit()
+    }
 
     private fun displayBmi() {
         binding?.mainActivity?.visibility = View.GONE

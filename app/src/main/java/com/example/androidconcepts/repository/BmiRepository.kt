@@ -3,11 +3,11 @@ package com.example.androidconcepts.repository
 import android.content.ContentValues.TAG
 import android.util.Log
 import com.example.androidconcepts.model.BmiResponseEntity
-import com.example.androidconcepts.retrofit.BmiRetrofit
+import com.example.androidconcepts.retrofit.RetrofitApiCall
 import javax.inject.Inject
 
 class BmiRepository @Inject constructor(
-    var retrofit : BmiRetrofit
+    var retrofit : RetrofitApiCall
 ) {
 
     suspend fun bmicalc(weight:String, height : String) : BmiResponseEntity {

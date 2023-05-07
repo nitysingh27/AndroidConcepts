@@ -37,7 +37,10 @@ class BmiFragment : androidx.fragment.app.Fragment() {
         var weight = bmiFragmentBinding?.bmiWeight?.text.toString()
         var height = bmiFragmentBinding?.bmiHeight?.text.toString()
         var result = bmiViewModel?.calculateBmi(weight, height)
-        bmiFragmentBinding?.bmiResult?.visibility = View.VISIBLE
-        bmiFragmentBinding?.bmiResult?.text = result
+        result?.observe(viewLifecycleOwner,{
+            bmiFragmentBinding?.bmiResult?.visibility = View.VISIBLE
+            bmiFragmentBinding?.bmiResult?.text = it.toString()
+        })
+
     }
 }

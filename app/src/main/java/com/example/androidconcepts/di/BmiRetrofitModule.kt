@@ -1,7 +1,6 @@
 package com.example.androidconcepts.di
 
-import com.example.androidconcepts.BuildConfig
-import com.example.androidconcepts.retrofit.BmiRetrofit
+import com.example.androidconcepts.retrofit.RetrofitApiCall
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Module
@@ -38,11 +37,11 @@ object BmiRetrofitModule {
 
     @Provides
     @Singleton
-    fun provideRetrofit(gson: Gson, client: OkHttpClient): BmiRetrofit =
+    fun provideRetrofit(gson: Gson, client: OkHttpClient): RetrofitApiCall =
         Retrofit.Builder()
             .baseUrl(baseUrl)
             .client(client)
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
-            .create(BmiRetrofit::class.java)
+            .create(RetrofitApiCall::class.java)
 }

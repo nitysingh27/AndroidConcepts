@@ -1,7 +1,7 @@
 package com.example.androidconcepts.di
 
 import com.example.androidconcepts.repository.BmiRepository
-import com.example.androidconcepts.retrofit.BmiRetrofit
+import com.example.androidconcepts.retrofit.RetrofitApiCall
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -14,7 +14,7 @@ object RepositoryModule  {
     //Step 1: Give provides for creating object of bmirepository
     @Provides
     @Singleton
-    fun provideRepositoryObject(bmiRetrofit : BmiRetrofit ) : BmiRepository{
-        return BmiRepository(bmiRetrofit)
+    fun provideRepositoryObject(retrofitApiCall : RetrofitApiCall ) : BmiRepository{
+        return BmiRepository(retrofitApiCall)
     }
 }

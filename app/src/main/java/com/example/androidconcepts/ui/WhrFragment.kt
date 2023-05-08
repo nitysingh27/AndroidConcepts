@@ -41,7 +41,7 @@ class WhrFragment : Fragment() {
         result?.observe(viewLifecycleOwner) {
             whrFragmentBinding?.whrResult?.visibility = View.VISIBLE
             // bmrFragmentBinding?.bmrResult?.text = "${it.info.bmi} , ${it.info.health}"
-            whrFragmentBinding?.whrResult?.text = "${it.whr.toString()} , ${it.gender}"
+            whrFragmentBinding?.whrResult?.text = "${it.whr.toString()} , ${it.bodyShape} , ${it.riskLevel} ,  ${it.gender}"
         }
 
         //whrFragmentBinding?.whrResult?.text=result

@@ -7,4 +7,6 @@ import kotlinx.parcelize.Parcelize
 data class WhrInfo(
     val whr: Double,
     val gender: String,
+    val bodyShape : String,
+    val riskLevel : String
 ) : Parcelable

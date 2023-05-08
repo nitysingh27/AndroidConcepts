@@ -1,0 +1,70 @@
+Index: app/src/main/java/com/example/androidconcepts/di/RepositoryModule.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.androidconcepts.di\r\n\r\nimport com.example.androidconcepts.repository.BfpRepository\r\nimport com.example.androidconcepts.repository.BmiRepository\r\nimport com.example.androidconcepts.repository.BmrRepository\r\nimport com.example.androidconcepts.retrofit.RetrofitApiCall\r\nimport com.example.androidconcepts.room.BmiDao\r\nimport com.example.androidconcepts.room.BmrDao\r\nimport dagger.Module\r\nimport dagger.Provides\r\nimport dagger.hilt.InstallIn\r\nimport dagger.hilt.components.SingletonComponent\r\nimport javax.inject.Singleton\r\n\r\n@Module\r\n@InstallIn(SingletonComponent::class)\r\nobject RepositoryModule  {\r\n    //Step 1: Give provides for creating object of bmirepository\r\n    @Provides\r\n    @Singleton\r\n    fun provideRepositoryObject(retrofitApiCall : RetrofitApiCall, bmiDao: BmiDao ) : BmiRepository{\r\n        return BmiRepository(retrofitApiCall, bmiDao)\r\n    }\r\n    @Provides\r\n    @Singleton\r\n    fun provideRepositoryObjectForBmr(retrofitApiCall : RetrofitApiCall, bmrDao: BmrDao ) : BmrRepository {\r\n        return BmrRepository(retrofitApiCall, bmrDao)\r\n    }\r\n    @Provides\r\n    @Singleton\r\n    fun provideRepositoryObjectForBfp(retrofitApiCall : RetrofitApiCall) : BfpRepository {\r\n        return BfpRepository(retrofitApiCall)\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/androidconcepts/di/RepositoryModule.kt b/app/src/main/java/com/example/androidconcepts/di/RepositoryModule.kt
+--- a/app/src/main/java/com/example/androidconcepts/di/RepositoryModule.kt	(revision 1708b20e03ee928ccef3aa5c0a1e758f3eae1860)
++++ b/app/src/main/java/com/example/androidconcepts/di/RepositoryModule.kt	(date 1683523960549)
+@@ -3,6 +3,7 @@
+ import com.example.androidconcepts.repository.BfpRepository
+ import com.example.androidconcepts.repository.BmiRepository
+ import com.example.androidconcepts.repository.BmrRepository
++import com.example.androidconcepts.repository.WhrRepository
+ import com.example.androidconcepts.retrofit.RetrofitApiCall
+ import com.example.androidconcepts.room.BmiDao
+ import com.example.androidconcepts.room.BmrDao
+@@ -31,4 +32,10 @@
+     fun provideRepositoryObjectForBfp(retrofitApiCall : RetrofitApiCall) : BfpRepository {
+         return BfpRepository(retrofitApiCall)
+     }
++
++    @Provides
++    @Singleton
++    fun provideRepositoryObjectForWhr() : WhrRepository {
++        return WhrRepository()
++    }
+ }
+\ No newline at end of file
+Index: app/src/main/java/com/example/androidconcepts/ui/BfpFragment.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.androidconcepts.ui\r\n\r\nimport android.annotation.SuppressLint\r\nimport android.os.Bundle\r\nimport android.view.LayoutInflater\r\nimport android.view.View\r\nimport android.view.ViewGroup\r\nimport androidx.databinding.DataBindingUtil\r\nimport androidx.fragment.app.viewModels\r\nimport com.example.androidconcepts.R\r\nimport com.example.androidconcepts.databinding.BfpFragmentBinding\r\nimport com.example.androidconcepts.databinding.FragmentBmrBinding\r\nimport com.example.androidconcepts.viewmodel.BfpViewModel\r\nimport com.example.androidconcepts.viewmodel.BmiFragmentViewModel\r\nimport com.example.androidconcepts.viewmodel.BmrFragmentViewModel\r\nimport dagger.hilt.android.AndroidEntryPoint\r\n\r\n@AndroidEntryPoint\r\nclass BfpFragment : androidx.fragment.app.Fragment() {\r\n    var bmrFragmentBinding: BfpFragmentBinding? = null\r\n    private val bmrViewModel: BfpViewModel by viewModels()\r\n    override fun onCreateView(\r\n        inflater: LayoutInflater,\r\n        container: ViewGroup?,\r\n        savedInstanceState: Bundle?\r\n    ): View? {\r\n        /*bmiViewModel = ViewModelProvider(\r\n            this,\r\n            ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().application)\r\n        )[BmiFragmentViewModel::class.java]*/\r\n        bmrFragmentBinding =\r\n            DataBindingUtil.inflate(inflater, R.layout.bfp_fragment, container, false)\r\n        bmrFragmentBinding?.bmrCalculate?.setOnClickListener {\r\n            calculate()\r\n        }\r\n        return bmrFragmentBinding?.root\r\n    }\r\n\r\n    @SuppressLint(\"SetTextI18n\")\r\n    fun calculate() {\r\n        var weight = bmrFragmentBinding?.bmrWeight?.text.toString()\r\n        var height = bmrFragmentBinding?.bmrHeight?.text.toString()\r\n        var age = bmrFragmentBinding?.bmrAge?.text.toString()\r\n        var gender = bmrFragmentBinding?.bmrGender?.text.toString()\r\n        var result = bmrViewModel?.calculateBfp(weight, height,age,gender)\r\n        result?.observe(viewLifecycleOwner) {\r\n            bmrFragmentBinding?.bmrResult?.visibility = View.VISIBLE\r\n            // bmrFragmentBinding?.bmrResult?.text = \"${it.info.bmi} , ${it.info.health}\"\r\n            bmrFragmentBinding?.bmrResult?.text = \"${it.bfp.toString()}, ${it.gender} , ${it.lean_mass}, ${it.fat_mass} ,${it.description}\"\r\n        }\r\n        bmrFragmentBinding?.bmrResult?.visibility = View.VISIBLE\r\n       // bmrFragmentBinding?.bmrResult?.text=result.toString()\r\n\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/androidconcepts/ui/BfpFragment.kt b/app/src/main/java/com/example/androidconcepts/ui/BfpFragment.kt
+--- a/app/src/main/java/com/example/androidconcepts/ui/BfpFragment.kt	(revision 1708b20e03ee928ccef3aa5c0a1e758f3eae1860)
++++ b/app/src/main/java/com/example/androidconcepts/ui/BfpFragment.kt	(date 1683523960568)
+@@ -9,15 +9,13 @@
+ import androidx.fragment.app.viewModels
+ import com.example.androidconcepts.R
+ import com.example.androidconcepts.databinding.BfpFragmentBinding
+-import com.example.androidconcepts.databinding.FragmentBmrBinding
++import com.example.androidconcepts.databinding.FragmentBfpBinding
+ import com.example.androidconcepts.viewmodel.BfpViewModel
+-import com.example.androidconcepts.viewmodel.BmiFragmentViewModel
+-import com.example.androidconcepts.viewmodel.BmrFragmentViewModel
+ import dagger.hilt.android.AndroidEntryPoint
+ 
+ @AndroidEntryPoint
+ class BfpFragment : androidx.fragment.app.Fragment() {
+-    var bmrFragmentBinding: BfpFragmentBinding? = null
++    var bmrFragmentBinding: FragmentBfpBinding? = null
+     private val bmrViewModel: BfpViewModel by viewModels()
+     override fun onCreateView(
+         inflater: LayoutInflater,
+@@ -29,7 +27,7 @@
+             ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().application)
+         )[BmiFragmentViewModel::class.java]*/
+         bmrFragmentBinding =
+-            DataBindingUtil.inflate(inflater, R.layout.bfp_fragment, container, false)
++            DataBindingUtil.inflate(inflater, R.layout.fragment_bfp, container, false)
+         bmrFragmentBinding?.bmrCalculate?.setOnClickListener {
+             calculate()
+         }
+diff --git a/app/src/main/res/layout/bfp_fragment.xml b/app/src/main/res/layout/fragment_bfp.xml
+rename from app/src/main/res/layout/bfp_fragment.xml
+rename to app/src/main/res/layout/fragment_bfp.xml

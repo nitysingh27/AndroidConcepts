@@ -15,6 +15,7 @@ abstract class RoomDataBase : RoomDatabase() {
     abstract fun bmiDao(): BmiDao
     abstract fun bmrDao() : BmrDao
     abstract fun bfpDao() : BfpDao
+    abstract fun whrDao() : WhrDao
 
     companion object {
         @Volatile

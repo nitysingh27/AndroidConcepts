@@ -2,10 +2,7 @@ package com.example.androidconcepts.di
 
 import android.content.Context
 import androidx.room.Room
-import com.example.androidconcepts.room.BfpDao
-import com.example.androidconcepts.room.BmiDao
-import com.example.androidconcepts.room.BmrDao
-import com.example.androidconcepts.room.RoomDataBase
+import com.example.androidconcepts.room.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -42,6 +39,12 @@ object RoomModule {
     @Singleton
     fun provideBfpDao(db: RoomDataBase) : BfpDao {
         return db.bfpDao()
+    }
+
+    @Provides
+    @Singleton
+    fun provideWhrDao(db: RoomDataBase) : WhrDao {
+        return db.whrDao()
     }
 
 

@@ -25,7 +25,17 @@ class MainActivity : AppCompatActivity() {
         binding?.bfp?.setOnClickListener {
             displayBfp()
         }
+        binding?.whr?.setOnClickListener {
+            displayWhr()
+        }
 
+    }
+
+    private fun displayWhr() {
+        binding?.mainActivity?.visibility = View.GONE
+        binding?.fragmentContainer?.visibility = View.VISIBLE
+        supportFragmentManager.beginTransaction().replace(R.id.fragment_container, WhrFragment())
+            .commit()
     }
 
     private fun displayBfp() {

@@ -8,16 +8,13 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import com.example.androidconcepts.R
-import com.example.androidconcepts.databinding.BfpFragmentBinding
-import com.example.androidconcepts.databinding.FragmentBmrBinding
+import com.example.androidconcepts.databinding.FragmentBfpBinding
 import com.example.androidconcepts.viewmodel.BfpViewModel
-import com.example.androidconcepts.viewmodel.BmiFragmentViewModel
-import com.example.androidconcepts.viewmodel.BmrFragmentViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class BfpFragment : androidx.fragment.app.Fragment() {
-    var bmrFragmentBinding: BfpFragmentBinding? = null
+    var bmrFragmentBinding: FragmentBfpBinding? = null
     private val bmrViewModel: BfpViewModel by viewModels()
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -29,7 +26,7 @@ class BfpFragment : androidx.fragment.app.Fragment() {
             ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().application)
         )[BmiFragmentViewModel::class.java]*/
         bmrFragmentBinding =
-            DataBindingUtil.inflate(inflater, R.layout.bfp_fragment, container, false)
+            DataBindingUtil.inflate(inflater, R.layout.fragment_bfp, container, false)
         bmrFragmentBinding?.bmrCalculate?.setOnClickListener {
             calculate()
         }

@@ -1,9 +1,6 @@
 package com.example.androidconcepts.retrofit
 
-import com.example.androidconcepts.model.BfpResposneEntity
-import com.example.androidconcepts.model.BmiResponseEntity
-import com.example.androidconcepts.model.BmrInfo
-import com.example.androidconcepts.model.BmrResposneEntity
+import com.example.androidconcepts.model.*
 import retrofit2.http.GET
 import retrofit2.http.Headers
 import retrofit2.http.Query
@@ -43,5 +40,16 @@ interface RetrofitApiCall {
         @Query("age") age: String,
         @Query("gender") gender: String
     ): BfpResposneEntity
+
+    @Headers(
+        "X-RapidAPI-Key:c1013262aamsh706a8f67b1e6ad3p1b4a90jsn936f9e42cf9a",
+        "X-RapidAPI-Host:mega-fitness-calculator1.p.rapidapi.com"
+    )
+    @GET("/whr")
+    suspend fun getWhr(
+        @Query("waist") waist: String,
+        @Query("hip") hip: String,
+        @Query("gender") gender: String
+    ): WhrResponseEntity
 
 }

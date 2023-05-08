@@ -3,10 +3,12 @@ package com.example.androidconcepts.di
 import com.example.androidconcepts.repository.BfpRepository
 import com.example.androidconcepts.repository.BmiRepository
 import com.example.androidconcepts.repository.BmrRepository
+import com.example.androidconcepts.repository.WhrRepository
 import com.example.androidconcepts.retrofit.RetrofitApiCall
 import com.example.androidconcepts.room.BfpDao
 import com.example.androidconcepts.room.BmiDao
 import com.example.androidconcepts.room.BmrDao
+import com.example.androidconcepts.room.WhrDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -31,5 +33,11 @@ object RepositoryModule  {
     @Singleton
     fun provideRepositoryObjectForBfp(retrofitApiCall : RetrofitApiCall, bfpDao: BfpDao) : BfpRepository {
         return BfpRepository(retrofitApiCall, bfpDao)
+    }
+
+    @Provides
+    @Singleton
+    fun provideRepositoryObjectForWhr(retrofitApiCall: RetrofitApiCall, whrDao: WhrDao) : WhrRepository {
+        return WhrRepository(retrofitApiCall,whrDao)
     }
 }

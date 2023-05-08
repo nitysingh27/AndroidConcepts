@@ -1,5 +1,7 @@
 package com.example.androidconcepts.repository
 
+import android.content.ContentValues.TAG
+import android.util.Log
 import com.example.androidconcepts.model.RoomEntity
 import com.example.androidconcepts.model.WhrInfo
 import com.example.androidconcepts.retrofit.RetrofitApiCall
@@ -18,11 +20,13 @@ class WhrRepository @Inject constructor(
         {
             var v = retrofitApiCall.getWhr(waist,hip, gender).whrInfo
             whrDao.insertWhrRequestResponse(RoomEntity(Gson().toJson(v),requestString))
+            Log.d(TAG, "getting from api: $v ")
             return v
         }
         else{
             var v= responseList.get(0).info
             var whrInfoObject = Gson().fromJson(v,WhrInfo::class.java)
+            Log.d(TAG, "getting from cache: $whrInfoObject ")
             return whrInfoObject
         }
 

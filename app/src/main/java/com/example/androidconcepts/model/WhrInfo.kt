@@ -5,7 +5,7 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class WhrInfo(
-    val whr: Double,
+    val whr: String,
     val gender: String,
     val bodyShape : String,
     val riskLevel : String

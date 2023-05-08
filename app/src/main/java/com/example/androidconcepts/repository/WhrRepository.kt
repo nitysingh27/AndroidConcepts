@@ -13,19 +13,18 @@ class WhrRepository @Inject constructor(
     private var retrofitApiCall: RetrofitApiCall,
     private var whrDao: WhrDao
 ) {
-    suspend fun calcwhr(waist:String,hip:String,gender:String):WhrInfo{
+    suspend fun calcwhr(waist: String, hip: String, gender: String): WhrInfo {
         var requestString = "{$waist} {$hip} {$gender}"
         var responseList = whrDao.getWhrFromRequest(requestString)
-        if (responseList.isEmpty())
-        {
-            var v = retrofitApiCall.getWhr(waist,hip, gender).whrInfo
-            whrDao.insertWhrRequestResponse(RoomEntity(Gson().toJson(v),requestString))
+        if (responseList.isEmpty()) {
+            var v = retrofitApiCall.getWhr(waist, hip, gender)
+            var m = v.info
+            whrDao.insertWhrRequestResponse(RoomEntity(Gson().toJson(v.info), requestString))
             Log.d(TAG, "getting from api: $v ")
-            return v
-        }
-        else{
-            var v= responseList.get(0).info
-            var whrInfoObject = Gson().fromJson(v,WhrInfo::class.java)
+            return m
+        } else {
+            var v = responseList.get(0).info
+            var whrInfoObject = Gson().fromJson(v, WhrInfo::class.java)
             Log.d(TAG, "getting from cache: $whrInfoObject ")
             return whrInfoObject
         }

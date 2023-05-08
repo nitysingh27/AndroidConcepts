@@ -24,7 +24,7 @@ class WhrViewModel @Inject constructor(
         var whrResponse : WhrInfo
         viewModelScope.launch(Dispatchers.IO) {
             whrResponse = whrRepository.calcwhr(waist,hip, gender)
-            liveDataResponse.postValue(whrResponse ?: WhrInfo(0.0, " "))
+            liveDataResponse.postValue(whrResponse ?: WhrInfo("0.0", " ", "", ""))
         }
         return liveDataResponse
     }

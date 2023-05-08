@@ -5,5 +5,5 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class WhrResponseEntity(
-    var whrInfo : WhrInfo
+    var info : WhrInfo
 ):Parcelable
